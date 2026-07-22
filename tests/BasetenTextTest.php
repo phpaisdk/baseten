@@ -17,7 +17,7 @@ it('uses Baseten general OpenAI-compatible chat completions', function (): void 
     Generate::configure(new Sdk($client, $factory, $factory));
     Baseten::create(['apiKey' => 'baseten-test']);
     $result = Generate::text('Hi')->model(Baseten::model('deepseek-ai/DeepSeek-V4-Pro'))->run();
-    expect($result->text)->toBe('Hello from Baseten Model API')->and((string) $client->lastRequest?->getUri())->toBe('https://inference.baseten.co/v1/chat/completions')->and($client->lastRequest?->getHeaderLine('Authorization'))->toBe('Bearer baseten-test')->and($client->sentBody()['model'])->toBe('deepseek-ai/DeepSeek-V4-Pro');
+    expect($result->text)->toBe('Hello from Baseten Model API')->and((string) $client->lastRequest?->getUri())->toBe('https://inference.baseten.co/v1/chat/completions')->and($client->lastRequest?->getHeaderLine('Authorization'))->toBe('Api-Key baseten-test')->and($client->sentBody()['model'])->toBe('deepseek-ai/DeepSeek-V4-Pro');
 });
 it('accepts opaque Baseten model identifiers', function (): void {
     Baseten::create(['apiKey' => 'baseten-test']);

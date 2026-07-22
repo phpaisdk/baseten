@@ -19,8 +19,8 @@ final class BasetenOptions
     /** @param array<string, mixed> $config */
     public static function fromArray(array $config = []): self
     {
-        $apiKey = Env::loadApiKey(isset($config['apiKey']) ? (string) $config['apiKey'] : null, 'Baseten_API_KEY', self::PROVIDER_NAME);
-        $baseUrl = Url::withoutTrailingSlash(Env::loadOptionalSetting(isset($config['baseUrl']) ? (string) $config['baseUrl'] : null, 'Baseten_BASE_URL') ?? self::DEFAULT_BASE_URL);
+        $apiKey = Env::loadApiKey(isset($config['apiKey']) ? (string) $config['apiKey'] : null, 'BASETEN_API_KEY', self::PROVIDER_NAME);
+        $baseUrl = Url::withoutTrailingSlash(Env::loadOptionalSetting(isset($config['baseUrl']) ? (string) $config['baseUrl'] : null, 'BASETEN_BASE_URL') ?? self::DEFAULT_BASE_URL);
         /** @var array<string, string> $headers */
         $headers = isset($config['headers']) && is_array($config['headers']) ? $config['headers'] : [];
         $sdk = $config['sdk'] ?? null;
@@ -31,6 +31,6 @@ final class BasetenOptions
     /** @return array<string, string> */
     public function authHeaders(): array
     {
-        return array_merge(['Authorization' => 'Bearer ' . $this->apiKey], $this->headers);
+        return array_merge(['Authorization' => 'Api-Key ' . $this->apiKey], $this->headers);
     }
 }
